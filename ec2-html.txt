@@ -1,85 +1,23 @@
-EC2 Deployment for index.html
 STEP 1 — Connect to EC2
-
-📌 Run on your laptop terminal (PowerShell / Git Bash)
-
 ssh -i examkey.pem ubuntu@<your-ec2-public-ip>
-
-STEP 2 — Install Required Software
-
-📌 Run inside EC2 terminal
-
+STEP 2 — Install Needed Software
 sudo apt update
 sudo apt install docker.io -y
 sudo apt install git -y
 sudo apt install nano -y
-
-STEP 3 — Clone Your Repository
-
-📌 Run inside EC2 terminal
-
+STEP 3 — Clone Your GitHub Repository
 git clone <your-github-repo-url>
 cd <repo-folder-name>
-
-
-Example (if using sample repo):
-
-git clone https://github.com/yourname/index-html-demo.git
-cd index-html-demo
-
 STEP 4 — Create Dockerfile
-
-📌 Run inside EC2 terminal
-
 nano Dockerfile
-
-
-📌 Paste this inside:
-
 FROM nginx:latest
 COPY index.html /usr/share/nginx/html/
-
-
-Save:
-
 CTRL + O → ENTER → CTRL + X
-
 STEP 5 — Build Docker Image
-
-📌 Run inside EC2 terminal
-
 sudo docker build -t simple-web .
 sudo docker images
-
-
-Expected result:
-
-simple-web   latest
-
-STEP 6 — Run Container
-
-📌 Run inside EC2 terminal
-
+STEP 6 — Run Docker Container
 sudo docker run -d --name web-demo -p 80:80 simple-web
-sudo docker ps
-
-
-Expected mapping:
-
-0.0.0.0:80->80
-
-⭐ STEP 7 — Test the Website
-
-Open in browser:
-
+STEP 7 — Test Website
 http://<your-ec2-public-ip>
 
-STEP 8 — Fix Security Group (Only if not loading)
-
-Add Inbound Rules:
-
-Type	Port	Source
-HTTP	80	0.0.0.0/0
-STOP / REMOVE Container (optional)
-sudo docker stop web-demo
-sudo docker rm web-demo
