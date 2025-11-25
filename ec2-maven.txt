@@ -1,83 +1,29 @@
-Full Final Working Deployment Flow
 STEP 1 — Connect to EC2
-
-📌 Run on your local system terminal (PowerShell / Git Bash)
-
 ssh -i examkey.pem ubuntu@<your-ec2-public-ip>
-
-STEP 2 — Install Required Software
-
-📌 Run inside EC2 terminal
-
+STEP 2 — Install Software (Docker, Git, Maven)
 sudo apt update
 sudo apt install docker.io -y
 sudo apt install git -y
 sudo apt install maven -y
-
 STEP 3 — Give Docker Permission
-
-📌 Run inside EC2 terminal
-
 sudo usermod -aG docker $USER
 newgrp docker
 docker ps
-
-STEP 4 — Clone Project
-
-📌 Run inside EC2 terminal
-
-git clone <your-github-repo-url>
+STEP 4 — Clone Project From GitHub
 git clone https://github.com/vyshnavi/maven-java.git
 cd maven-java
-
-STEP 5 — Build Maven Project
-
-📌 Run inside EC2 terminal
-
+STEP 5 — Build the Maven Project
 mvn clean package
 ls target
-
 STEP 6 — Create Dockerfile
-
-📌 Run inside EC2 terminal
-
 nano Dockerfile
-
-
-📌 Paste inside:
-
 FROM tomcat:9
 COPY target/*.war /usr/local/tomcat/webapps/
-
-
-Press: CTRL + O → Enter → CTRL + X
-
+CTRL + O → ENTER → CTRL + X
 STEP 7 — Build Docker Image
-
-📌 Run inside EC2 terminal
-
 docker build -t myapp .
 docker images
-
-
-Expected Output:
-
-myapp   latest
-
 STEP 8 — Run Docker Container
-
-📌 Run inside EC2 terminal
-
 docker run -d --name app-demo -p 6060:8080 myapp
-docker ps
-
-
-Expected Output:
-
-0.0.0.0:6060->8080
-
-⭐ STEP 9 — Test Application
-
-Open in browser:
-
+STEP 9 — Test Application
 http://<public-ip>:6060
