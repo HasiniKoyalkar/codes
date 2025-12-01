@@ -1,10 +1,4 @@
-script
-+ new item -script name
-pipeline
-in triggers click build periodically 
-* * * * *
-paste script 
-in script go to build
+
 
 
 pipeline {
@@ -44,25 +38,7 @@ pipeline {
 
 
 
-Week 9: Pipeline Creation using script Last year fie
-1.	Evaluation of Jenkins pipeline.
-2.	WORKING ON BUILD TRIGGERS FOR LAST JENKINS PIPILINE
-3.	Hands-on practice on creation of scripted Jenkins pipeline.
-4.	Take  the screenshots for above task 
 
-
-Procedure
-General :
- 	Description :-  provide the description of the project
-	Build triggers:  here we can provide with build triggers of you choice
-Advance project option:
-	Definition: 
-		Choose pipeline script
- 
-Here code for pipeline -script
-	
-Copy the code there
--------------------------------------------------------------------------------------------------------------------------
 pipeline {
     agent any
     tools{
@@ -204,20 +180,4 @@ pipeline {
 
 
 
-node {
-    stage('Checkout') {
-        echo "Checking out source code..."
-    }
 
-    stage('Build') {
-        echo "Building the project..."
-    }
-
-    stage('Test') {
-        echo "Running tests..."
-    }
-
-    stage('Deploy') {
-        echo "Deploying..."
-    }
-}
