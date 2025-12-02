@@ -1,0 +1,20 @@
+
+
+MINIKUBE:
+minikube start
+kubectl create deployment nginx-deploy --image=nginx
+kubectl expose deployment nginx-deploy --type=NodePort --port=80 --name=nginx-service
+minikube service nginx-service --url
+http://localhost:8090
+kubectl get pods
+kubectl get svc
+NAGIOS:
+docker pull jasonrivers/nagios
+docker run --name nagios \
+    -d -p 8080:80 \
+    jasonrivers/nagios
+http://localhost:8080/nagios
+User: nagiosadmin
+Password: nagios
+
+}
