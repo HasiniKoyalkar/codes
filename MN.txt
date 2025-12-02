@@ -10,10 +10,8 @@ kubectl get pods
 kubectl get svc
 NAGIOS:
 docker pull jasonrivers/nagios
-docker run --name nagios \
-    -d -p 8080:80 \
-    jasonrivers/nagios
-http://localhost:8080/nagios
+docker run --name nagiosdemo -p 8888:80 jasonrivers/nagios:latest
+http://localhost:8888/nagios
 User: nagiosadmin
 Password: nagios
 
