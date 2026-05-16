@@ -1,0 +1,21 @@
+Open Burp Suite → Proxy → Intercept → turn ON
+Set browser proxy: IP 127.0.0.1, Port 8080
+Proxy → Options → Import/export CA certificate → export DER format → install in browser
+Open app login page → enter credentials → click Login → request captured in Burp
+In captured request, observe:
+
+POST /rest/user/login HTTP/1.1
+Host: localhost:3000
+{"email": "user@test.com", "password": "123456"}
+
+Modify values to:
+
+json{"email": "admin@test.com", "password": "admin123"}
+
+Click Forward → observe response (status, token)
+Intercept other requests (profile, orders) → modify userId, role, price
+Change amount value in a request:
+
+json{"amount": 1}
+
+Forward and observe behavior
