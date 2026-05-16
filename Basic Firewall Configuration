@@ -1,0 +1,40 @@
+Part A – Manual:
+
+Open Windows Defender Firewall with Advanced Security
+Click Inbound Rules → New Rule → Custom → Next
+All Programs → Next → keep default Protocol/Ports → Next
+Under Remote IP address → select "These IP addresses" → Add → enter IP (e.g. 1.2.3.4) → OK → Next
+Select "Block the connection" → Next → check Domain, Private, Public → Next
+Name the rule Manual_Block_IP → Finish
+
+Part B – Automated with Python:
+
+Create firewall.py:
+
+pythonimport requests
+import csv
+import subprocess
+
+response = requests.get(
+    "https://feodotracker.abuse.ch/downloads/ipblocklist.csv"
+).text
+
+rule = 'netsh advfirewall firewall delete rule name="BadIP"'
+subprocess.run(["PowerShell", "-Command", rule])
+
+mycsv = csv.reader(
+    filter(lambda x: not x.startswith("#"), response.splitlines())
+)
+
+for row in mycsv:
+    ip = row[1]
+    if ip != "dst_ip":
+        print("Added Rule to block:", ip)
+        rule = f"netsh advfirewall firewall add rule name='BadIP' Dir=Out Action=Block RemoteIP={ip}"
+        subprocess.run(["PowerShell", "-Command", rule])
+
+Open Command Prompt as Administrator
+cd C:\Users\YourName\Desktop
+python -m pip install requests
+python firewall.py
+Open Windows Defender Firewall → Outbound Rules → search for BadIP to verify
