@@ -1,0 +1,10 @@
+docker run -d -p 3000:3000 bkimminich/juice-shop
+Open http://localhost:3000 → register and login as regular user
+Try accessing http://localhost:3000/#/administration
+Go to Order History → modify request URL to /rest/orders/1, /rest/orders/2 (IDOR test)
+F12 → Network tab → identify API requests
+Burp Suite → intercept request → modify parameters to:
+
+json{"role": "admin"}
+
+Try accessing /admin and /rest/user/all
