@@ -1,0 +1,7 @@
+Login to AWS Console → IAM → Users → Add user → Username: security-auditor → select "Provide user access to AWS Management Console" → Attach policies directly → attach AdministratorAccess → Create user
+IAM User → Security Credentials → Assign MFA → choose "Authenticator app" → scan QR with Google Authenticator → enter two consecutive codes → Assign MFA
+EC2 → Security Groups → Create Security Group → Name: lab-secure-sg → Inbound: SSH, Port 22, Source: My IP → Outbound: Allow All → Create
+EC2 → Launch Instance → Name: lab-server → Amazon Linux AMI → t2.micro → create key pair lab-key → select lab-secure-sg → Launch
+S3 → Create Bucket → name: lab-secure-bucket-<unique> → Block Public Access: ON → enable bucket encryption → Create
+CloudTrail → Create Trail → name: lab-security-trail → create new S3 bucket → enable log file validation → Create
+Verify: EC2 instance running, S3 bucket private, CloudTrail logging active
