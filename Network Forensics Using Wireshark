@@ -1,0 +1,15 @@
+wireshark &
+Select eth0 or wlan0 → click Start Capture
+Apply filters: tcp, udp, or http
+Filter by IP: ip.addr == 192.168.0.161
+Filter by source: ip.src == 192.168.0.161
+Right-click any TCP packet → Follow → TCP Stream
+Open new terminal → nmap -sS 192.168.0.156
+Apply filter in Wireshark: tcp.flags.syn == 1 && tcp.flags.ack == 0
+Statistics → Capture File Properties
+Statistics → Resolved Addresses
+Statistics → Protocol Hierarchy
+Statistics → Conversations
+Statistics → Packet Lengths
+Statistics → Endpoints
+Statistics → I/O Graphs → configure filters → click Graph
