@@ -1,0 +1,14 @@
+Open terminal: Ctrl + Alt + T
+echo "Cybersecurity Lab Evidence" > evidence.txt && ls
+lsblk → identify disk partition
+sudo apt install dc3dd
+dd if=/dev/zero of=practice_disk.dd bs=1M count=100
+mkfs.ext4 practice_disk.dd
+sudo dc3dd if=/dev/sda1 of=/home/kali/disk_image.dd hash=md5 log=/home/kali/acquisition.log
+ls -lh /home/kali/disk_image.dd && cat /home/kali/acquisition.log
+autopsy → note the URL shown (e.g. http://localhost:9999/autopsy) → open in browser
+Click "Create New Case" → Case Name: Forensic_Case_001, Description: Disk image analysis lab → Next
+Host Name: KaliLabMachine → Next
+Click "Add Image File" → browse to /home/kali/disk_image.dd → Image type: Disk Image → Next
+Navigate file system, check deleted files, view extracted data, use keyword search
+Click Reports → select format → generate and save
