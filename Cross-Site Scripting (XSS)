@@ -1,0 +1,17 @@
+docker run -d -p 3000:3000 bkimminich/juice-shop
+Open browser → http://localhost:3000
+Open Burp Suite → Proxy → Intercept → turn OFF
+Firefox → Preferences → Network Settings → Manual proxy → HTTP Proxy: 127.0.0.1, Port: 8080
+Browse Juice Shop, look for input fields (search bar, feedback form)
+Proxy → HTTP History → find request with input field → right-click → Send to Repeater
+In Repeater, modify input field value to <script>alert("XSS")</script> → Send
+Navigate to Contact Us/Feedback page → enter in comment field:
+
+html<script>alert("XSS")</script>
+
+Submit form → press F12 → Console tab to verify execution
+For Stored XSS, enter in any form that saves data:
+
+html<script>document.write('<img src=x onerror=alert("Stored XSS")>');</script>
+
+Submit → reload the page where input is displayed to confirm execution
