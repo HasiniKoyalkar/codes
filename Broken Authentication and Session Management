@@ -1,0 +1,17 @@
+sudo apt update && sudo apt install docker.io -y && sudo systemctl start docker
+docker run -d -p 3000:3000 --name juice-shop bkimminich/juice-shop
+Open http://localhost:3000
+Open Burp Suite → Proxy → Intercept ON → set browser proxy to 127.0.0.1:8080
+Login page → enter Email: ' OR 1=1 --, Password: anything → forward request in Burp
+Register a new account with password 12345 to test weak password policy
+Capture login request → Send to Intruder → select password field → load wordlist:
+
+/usr/share/wordlists/rockyou.txt
+
+Start Attack (brute force)
+Try valid email + wrong password, then invalid email + wrong password → compare error messages (username enumeration)
+Login → F12 → Application → Cookies → check for HTTPOnly and Secure flags
+Copy session cookie → open another browser → replace cookie value → refresh (session hijacking test)
+Note session ID before login → login → compare session ID before and after (session fixation test)
+Login → copy cookie → logout → reuse copied cookie (logout mechanism test)
+Copy JWT token from response → go to https://jwt.io → paste and decode
