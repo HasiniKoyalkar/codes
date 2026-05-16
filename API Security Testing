@@ -1,0 +1,16 @@
+docker run -d -p 3000:3000 bkimminich/juice-shop
+Burp Suite → set proxy 127.0.0.1:8080 → Intercept ON
+Open Juice Shop → perform actions (login, view products, orders) → capture API requests in Burp
+Note URLs, parameters, and authentication tokens from captured requests
+Modify API request URL to /rest/user/1, /rest/user/2 (IDOR)
+Send request to Repeater/Intruder → try inputs:
+
+' OR 1=1 --
+../../etc/passwd
+
+Send multiple login requests rapidly → observe if system blocks (rate limiting test)
+Remove or modify token header:
+
+Authorization: Bearer invalid_token
+
+Inject malicious input in API parameters → observe response changes
