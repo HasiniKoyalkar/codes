@@ -1,0 +1,22 @@
+Download and install Android Studio from developer.android.com
+Open AVD Manager → Create Virtual Device → select Pixel 2 or Pixel 9 → download system image → Finish
+Open Command Prompt:
+
+cmdcd C:\Users\Admin\AppData\Local\Android\Sdk\emulator
+emulator -list-avds
+emulator -avd Pixel_9 -http-proxy http://10.0.2.2:8080
+
+Burp Suite → Proxy → Options → Proxy Listeners → Edit → select "All interfaces" → OK
+Set proxy via ADB:
+
+cmdcd C:\Users\Admin\AppData\Local\Android\Sdk\platform-tools
+adb devices
+adb shell settings put global http_proxy 10.0.2.2:8080
+adb shell settings get global http_proxy
+
+In AVD, open Chrome → visit http://example.com → check Burp HTTP History
+Burp → Proxy → Options → Import/export CA certificate → export DER format → save as burpcer.der
+adb push C:\Users\Admin\Downloads\burpcer.cer /sdcard/Download/
+In AVD → Settings → Security & privacy → More security & privacy → Encryption & credentials → Install a certificate → CA certificate → select burpcer.der
+Visit https://example.com in AVD Chrome → verify HTTPS traffic appears in Burp
+Go to https://reports.exodus-privacy.eu.org → search WhatsApp → note trackers and permissions
