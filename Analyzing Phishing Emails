@@ -1,0 +1,8 @@
+Obtain a sample .eml phishing email file
+Go to an online EML Analyzer tool → upload the .eml file
+Check sender email address, domain, and extract sender IP from headers
+Go to https://www.virustotal.com → enter sender IP → check detection ratio
+Check SPF, DKIM, and DMARC results in the analyzer output
+Look for suspicious URLs in the email body → check if domain matches sender
+Note: full sender email, domain, IP, blacklist status, SPF result, suspicious URL
+Classify as Phishing or Legitimate based on findings
