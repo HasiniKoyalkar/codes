@@ -1,0 +1,17 @@
+sudo apt update
+sudo apt install docker.io -y
+sudo systemctl start docker
+sudo systemctl enable docker
+docker --version
+sudo usermod -aG docker $USER
+# reboot after this
+docker pull bkimminich/juice-shop
+docker run -d -p 3000:3000 bkimminich/juice-shop
+burpsuite
+Navigate to http://localhost:3000/#/login in Burp's browser. Enter any dummy email/password and click Login. In HTTP History, find /rest/user/login, right-click → Send to Intruder. In Intruder → Positions, click Clear §, select the email value, click Add §. In Payloads tab, uncheck "URL Encode these characters", add these payloads:
+' OR 1=1 --
+' OR '1'='1
+admin' --
+' OR 1=1#
+' OR ''='
+Start Attack. Look for status 200, copy the token from the response, go to Decoder tab, paste and decode as Base64. Login with admin@juice-sh.op / admin123
