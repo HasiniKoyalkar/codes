@@ -1,0 +1,14 @@
+sudo apt update && sudo apt install nodejs npm -y
+sudo npm install -g nativefier
+nativefier https://web.whatsapp.com
+cd WhatsAppWeb-linux-x64 && ./WhatsAppWeb
+Login with QR code
+Go to https://reports.exodus-privacy.eu.org → search WhatsApp → note trackers and permissions
+wireshark → start capture
+Apply filters: tls, dns
+Send messages, images in WhatsApp → observe traffic in Wireshark
+Open https://www.facebook.com in browser
+burpsuite → set browser proxy 127.0.0.1:8080 → Intercept ON → reload Facebook → analyze cookies/headers
+F12 → Network tab → look for ads and analytics scripts
+Go to https://haveibeenpwned.com → enter email → check breach status
+Document: WhatsApp encryption status, Facebook tracking behavior, breach info
