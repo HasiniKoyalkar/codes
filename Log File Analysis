@@ -1,0 +1,18 @@
+Open terminal in Kali Linux
+cd /var/log && ls
+last (check successful logins)
+journalctl | less (press q to exit)
+journalctl | grep "Failed"
+journalctl | grep ssh
+journalctl | grep -i error
+cd /var/log/apache2 && ls && sudo less access.log
+grep "404" /var/log/apache2/access.log
+less /var/log/dpkg.log
+sudo journalctl -f (real-time, press Ctrl+C to stop)
+sudo apt install openssh-server -y && sudo service ssh start && ip a
+ssh fakeuser@localhost → enter wrong password 5–10 times
+journalctl | grep "Failed password"
+journalctl | grep "Failed password" | awk '{print $11}'
+journalctl | grep "Failed password" | awk '{print $11}' | sort | uniq -c | sort -nr
+sudo lastb
+journalctl --since "10 minutes ago"
