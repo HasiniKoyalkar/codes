@@ -1,0 +1,13 @@
+Download Npcap from npcap.com → install with "WinPcap API-compatible mode" enabled
+Download Snort 2.9 for Windows → install to C:\Snort
+Navigate to C:\Snort\etc\ → edit snort.conf → update paths for dynamic modules and log directory
+Create C:\Snort\rules\local.rules with:
+
+alert icmp any any -> any any (msg:"Ping Detected"; sid:1000001; rev:1;)
+alert tcp any any -> $HOME_NET any (msg:"Possible Port Scan"; flags:S; threshold:type threshold, track by_src, count 5, seconds 10; sid:1000002; rev:1;)
+
+cd C:\Snort\bin → snort -W → note your network interface number
+snort -i 5 -c C:\Snort\etc\snort.conf -A console (replace 5 with your interface number)
+From Kali Linux: nmap -sS -T4 <Windows_IP_Address>
+Observe alerts appearing in the Snort console
+Check log directory for saved logs
