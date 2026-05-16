@@ -1,0 +1,6 @@
+docker run -d -p 3000:3000 bkimminich/juice-shop
+Open http://localhost:3000 → register and login
+Try accessing http://localhost:3000/#/administration
+Right-click page → Inspect → check JS files for hidden endpoints and hardcoded credentials
+Try accessing http://localhost:3000/ftp → download any exposed files
+Open Burp Suite → intercept requests → modify to bypass restrictions → observe server responses
