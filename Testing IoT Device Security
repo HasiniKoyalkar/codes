@@ -1,0 +1,11 @@
+docker run -d -p 8090:3000 --name juiceshop bkimminich/juice-shop
+Open http://localhost:8090 to verify
+ipconfig → note your IPv4 address (e.g. 192.168.0.148)
+From Kali Linux: nmap -sV 192.168.0.148
+Note open ports, service versions, exposed info
+nmap -sV 192.168.0.148 -p 8090
+Open http://192.168.0.148:8090 from Kali browser
+Try logging in with common default credentials (admin/admin, admin/password, etc.)
+F12 → Network tab → observe unencrypted HTTP traffic
+Document findings: open ports, service enumeration, unencrypted communication, weak authentication
+
