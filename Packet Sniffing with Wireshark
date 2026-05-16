@@ -1,0 +1,8 @@
+Open terminal in Kali Linux
+python3 -m http.server 8080
+Open another terminal → sudo tcpdump -i any -w capture.pcap port 8080
+Open Firefox → go to http://localhost:8080 → refresh multiple times
+Press Ctrl+C in tcpdump terminal to stop capture
+Open File Manager → find capture.pcap in home folder → double-click to open in Wireshark
+Filter for POST requests: http.request.method == "POST" → press Enter
+Click any packet → expand protocol sections → view browser, OS, URL details
